@@ -1,0 +1,9 @@
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+COPY orderservice/target/orderservice-1.0.0.jar orderservice.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "orderservice.jar"]
