@@ -17,6 +17,6 @@ dapr run \
 --components-path ./components \
 -- java -jar productservice/target/productservice-1.0.0.jar
 
-curl -X POST <your-app-url>/products \
+curl -X POST http://localhost:3500/v1.0/invoke/productservice/method/products \
 -H "Content-Type: application/json" \
 -d '{"id":1,"name":"Test Product"}'
