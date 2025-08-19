@@ -1,7 +1,8 @@
-apiVersion: dapr.io/v1alpha1
-kind: Component
+componentType: pubsub.redis
+version: v1
 metadata:
-  name: pubsub
-spec:
-  type: pubsub.in-memory
-  version: v1
+  - name: redisHost
+    value: "redis.internal.bluehill-7a77857c.eastus2.azurecontainerapps.io:6379"
+scopes:
+  - productservice
+  - orderservice
