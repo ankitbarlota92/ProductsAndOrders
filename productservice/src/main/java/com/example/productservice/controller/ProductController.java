@@ -1,25 +1,22 @@
-package com.example.productservice.controller;
-
-import com.example.productservice.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class ProductController {
 
-    private static final String DAPR_PUBSUB_URL = "http://localhost:3500/v1.0/publish/pubsub/product-updates";
-
     @Autowired
-    private RestTemplate restTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
+
+    private static final String CHANNEL = "product-updates";
 
     @PostMapping("/products")
     public String addProduct(@RequestBody Product product) {
         // Save product logic can be added here
 
-        // Publish event to Dapr pub/sub
-        restTemplate.postForObject(DAPR_PUBSUB_URL, product, String.class);
-        return "Product added and event published!";
+        // Publish event to Redis channel
+        redisTemplate.convertAndSend(CHANNEL, product);
+        return "Product added and event published to Redis!";
     }
 
     @GetMapping("/health")
