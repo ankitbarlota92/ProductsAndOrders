@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY orderservice/target/orderservice-1.0.0.jar orderservice.jar
 
-EXPOSE 8080
+EXPOSE 8081
 
 CMD ["java", "-jar", "orderservice.jar"]
