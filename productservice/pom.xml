@@ -25,6 +25,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- Add other dependencies as needed -->
+         <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-data-redis</artifactId>
+         </dependency>
     </dependencies>
 
     <build>
