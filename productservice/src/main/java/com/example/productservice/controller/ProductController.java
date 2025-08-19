@@ -1,6 +1,10 @@
+package com.example.productservice.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.productservice.model.Product;
 
 @RestController
 public class ProductController {
