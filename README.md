@@ -9,7 +9,7 @@ This project consists of two microservices:
 These services communicate using Dapr's pub/sub model with Redis as the message broker, deployed as a separate Azure Container App.
 
 ## Architecture Diagram
-![Architecture Diagram](RandomFileName_10730fe3-0255-496f-9c9a-ee23dc9eb84d.png)
+
 
 ## Docker Image Creation and Push to ACR
 Docker images are built and pushed to Azure Container Registry (ACR).
