@@ -35,7 +35,7 @@ az containerapp env create --name $ENVIRONMENT --resource-group $RESOURCE_GROUP 
 ```bash
 az containerapp create   --name productservice   --resource-group $RESOURCE_GROUP   --environment $ENVIRONMENT   --image $ACR/productservice:latest   --target-port 8080   --ingress external   --registry-server $ACR   --enable-dapr   --dapr-app-id productservice   --dapr-app-port 8080
 
-az containerapp create   --name orderservice   --resource-group $RESOURCE_GROUP   --environment $ENVIRONMENT   --image $ACR/orderservice:latest   --target-port 8080   --ingress internal   --registry-server $ACR   --enable-dapr   --dapr-app-id orderservice   --dapr-app-port 8080
+az containerapp create   --name orderservice   --resource-group $RESOURCE_GROUP   --environment $ENVIRONMENT   --image $ACR/orderservice:latest   --target-port 8081   --ingress internal   --registry-server $ACR   --enable-dapr   --dapr-app-id orderservice   --dapr-app-port 8081
 ```
 
 ### Set Registry Credentials
@@ -56,11 +56,15 @@ az containerapp update --name orderservice --resource-group $RESOURCE_GROUP --im
 
 ```bash
 az containerapp create   --name redis   --resource-group $RESOURCE_GROUP   --environment $ENVIRONMENT   --image redis:6.2   --target-port 6379   --ingress internal
+
 ```
 
 Redis FQDN:
 ```
-redis.internal.bluehill-7a77857c.eastus2.azurecontainerapps.io
+az containerapp show \
+  --name redis \
+  --resource-group $RESOURCE_GROUP \
+  --query properties.configuration.ingress.fqdn -o tsv
 ```
 
 ## Dapr Component and Subscription Setup
@@ -71,23 +75,9 @@ componentType: pubsub.redis
 version: v1
 metadata:
   - name: redisHost
-    value: "redis.internal.bluehill-7a77857c.eastus2.azurecontainerapps.io:6379"
+    value: "$fqdn:6379"
 scopes:
   - productservice
-  - orderservice
-```
-
-### Subscription
-```yaml
-apiVersion: dapr.io/v1alpha1
-kind: Subscription
-metadata:
-  name: order-subscription
-spec:
-  topic: order-created
-  route: /orders
-  pubsubname: pubsub
-scopes:
   - orderservice
 ```
 
