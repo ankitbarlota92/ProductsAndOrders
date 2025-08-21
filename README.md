@@ -112,6 +112,44 @@ curl -X POST https://<productservice-fqdn>/products   -H "Content-Type: applicat
 az containerapp logs show --name productservice --resource-group productsandorders
 az containerapp logs show --name orderservice --resource-group productsandorders
 ```
+## GenAI-Assisted Tasks
+
+### 1. Suggested Telemetry Points & Retry Logic
+
+**Telemetry Suggestions:**
+- Track request latency and error rates per endpoint.
+- Log Dapr pub/sub message delivery status.
+- Monitor container resource usage (CPU, memory).
+- Include correlation IDs for distributed tracing.
+
+**Retry Logic Recommendations:**
+- Use exponential backoff for transient failures.
+- Implement retries in Dapr pub/sub with `maxRetries` and `retryInterval`.
+- Add circuit breaker patterns for downstream service calls.
+
+---
+
+### 2. Dockerfile & Dapr Component Review
+
+**Dockerfile Review Highlights:**
+- Ensure minimal base image.
+- Use multi-stage builds to reduce image size.
+- Set `HEALTHCHECK` for container monitoring.
+
+**Dapr Component Review:**
+- Validate pub/sub component uses secure credentials.
+- Ensure `metadata` includes `consumerID` for message tracking.
+- Use `scopedSubscriptions` to isolate service topics.
+
+---
+
+### 3. Scaling Pub/Sub Systems for Load Spikes
+
+**Scaling Strategies:**
+- Use ACA autoscaling based on CPU/memory or HTTP queue length.
+- Enable Dapr sidecar concurrency settings (`maxConcurrency`).
+- Use distributed tracing to identify bottlenecks during spikes.
+
 
 ## Deliverables
 - Source Code Folder (Github)
@@ -122,3 +160,4 @@ az containerapp logs show --name orderservice --resource-group productsandorders
 - Architecture Diagram (Github README.md mermaid)
 - Screenshots and Logs (in PDF File)
 - README.md (Github)
+- GenAI assisted tasks output (Github)
