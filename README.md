@@ -12,6 +12,13 @@ These services communicate using Dapr's pub/sub model with Redis as the message 
 
 ```mermaid
 flowchart TD
+  subgraph DevOps["Azure DevOps Pipeline"]
+    E["GitHub Repo (Java Code)"]
+    F["Build & Push"]
+    E -- "Source Code" --> F
+    F -- "Docker Image" --> D
+  end
+
   subgraph ACA["ACA Environment"]
     A["ProductService (Dapr Sidecar)"]
     B["OrderService (Dapr Sidecar)"]
@@ -19,9 +26,10 @@ flowchart TD
     A -- "Publish Event" --> C
     B -- "Subscribe Event" --> C
   end
+
   D[Azure Container Registry]
-  D -- "Docker Images" --> A
-  D -- "Docker Images" --> B
+  D -- "Docker Image" --> A
+  D -- "Docker Image" --> B
 ```
 
 ## Docker Image Creation and Push to ACR
