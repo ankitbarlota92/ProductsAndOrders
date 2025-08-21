@@ -119,6 +119,6 @@ az containerapp logs show --name orderservice --resource-group productsandorders
 - Container Image Details (Github & Screenshots in PDF file)
 - Dapr Components Configuration (Github)
 - Azure Deployment Config (Screenshots in PDF file)
-- Architecture Diagram (Github)
+- Architecture Diagram (Github README.md mermaid)
 - Screenshots and Logs (in PDF File)
 - README.md (Github)
