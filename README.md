@@ -20,8 +20,8 @@ flowchart TD
   end
 
   subgraph ACA["ACA Environment"]
-    A["ProductService (Dapr Sidecar)"]
-    B["OrderService (Dapr Sidecar)"]
+    A["ProductService (DaprSidecar)"]
+    B["OrderService (DaprSidecar)"]
     C["Redis (Dapr Pub/Sub Component)"]
     A -- "Publish Event" --> C
     B -- "Subscribe Event" --> C
