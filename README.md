@@ -132,14 +132,11 @@ az containerapp logs show --name orderservice --resource-group productsandorders
 ### 2. Dockerfile & Dapr Component Review
 
 **Dockerfile Review Highlights:**
-- Ensure minimal base image.
-- Use multi-stage builds to reduce image size.
 - Set `HEALTHCHECK` for container monitoring.
 
 **Dapr Component Review:**
 - Validate pub/sub component uses secure credentials.
 - Ensure `metadata` includes `consumerID` for message tracking.
-- Use `scopedSubscriptions` to isolate service topics.
 
 ---
 
