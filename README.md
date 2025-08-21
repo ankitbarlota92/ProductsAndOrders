@@ -10,6 +10,19 @@ These services communicate using Dapr's pub/sub model with Redis as the message 
 
 ## Architecture Diagram
 
+```mermaid
+flowchart TD
+  subgraph ACA["Azure Container Apps Environment"]
+    A["ProductService (Dapr Sidecar)"]
+    B["OrderService (Dapr Sidecar)"]
+    C["Redis (Dapr Pub/Sub Component)"]
+    A -- "Publish Event" --> C
+    B -- "Subscribe Event" --> C
+  end
+  D[Azure Container Registry]
+  D -- "Docker Images" --> A
+  D -- "Docker Images" --> B
+```
 
 ## Docker Image Creation and Push to ACR
 Docker images are built and pushed to Azure Container Registry (ACR).
