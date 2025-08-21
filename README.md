@@ -12,7 +12,7 @@ These services communicate using Dapr's pub/sub model with Redis as the message 
 
 ```mermaid
 flowchart TD
-  subgraph ACA["Azure Container Apps Environment"]
+  subgraph ACA["ACA Environment"]
     A["ProductService (Dapr Sidecar)"]
     B["OrderService (Dapr Sidecar)"]
     C["Redis (Dapr Pub/Sub Component)"]
