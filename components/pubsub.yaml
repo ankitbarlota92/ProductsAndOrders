@@ -1,8 +1,14 @@
-componentType: pubsub.redis
-version: v1
+apiVersion: dapr.io/v1alpha1
+kind: Component
 metadata:
+  name: redis-pubsub
+  namespace: default
+spec:
+  type: pubsub.redis
+  version: v1
+  metadata:
   - name: redisHost
-    value: "redis.internal.bluehill-7a77857c.eastus2.azurecontainerapps.io:6379"
+    value: "<redis-fqdn>:6379"
 scopes:
   - productservice
   - orderservice
